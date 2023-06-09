@@ -6,7 +6,7 @@ from tqdm import tqdm
 import numpy as np
 import webbrowser
 
-#print("Made by the method of: https://github.com/chrizonix/XInputTest")
+print("Based on the method of: https://github.com/chrizonix/XInputTest")
 print(f" ")
 print(f" ")
 print(f"   ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ ██╗      █████╗ ")
