@@ -50,7 +50,7 @@ else:
     joystick_name = joystick.get_name()
     print(f"Gamepad mode: {joystick_name}")
     print(f" ")
-    print(f"Move the left stick in a circular without stopping")
+    print(f"Rotate left stick without stopping")
 
 if not joystick.get_init():
     print("Controller not connected")
@@ -99,6 +99,8 @@ with tqdm(total=repeat, ncols=80) as pbar:
                 break
 
 delay_list = filter_outliers(delay_list)
+
+
 
 filteredMin = min(delay_list)
 filteredMax = max(delay_list)
