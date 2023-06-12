@@ -1,10 +1,12 @@
-print("Gamepadla 1.0.1")
+ver = "1.0.2"
+print("Gamepadla " + ver + " | https://gamepadla.com")
+print("")
+
 import pygame
 import time
-import base64
 from tqdm import tqdm
 import numpy as np
-import webbrowser
+import platform
 
 print("Based on the method of: https://github.com/chrizonix/XInputTest")
 print(f" ")
@@ -18,11 +20,11 @@ print(f"   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚�
 print("                                         by John Punch: https://t.me/ivanpunch")
 print(f" ")
 
-repeat = 2000
+repeat = 1984 #1984
 
 def filter_outliers(array):
-    lower_quantile = 0.02  # Lower quantile (2%)
-    upper_quantile = 0.98  # Upper quantile (98%)
+    lower_quantile = 0.02  # Lower quantile (1%)
+    upper_quantile = 0.995  # Upper quantile (99%)
 
     sorted_array = sorted(array)
     lower_index = int(len(sorted_array) * lower_quantile)
@@ -61,7 +63,7 @@ start_time = time.time()
 
 prev_x, prev_y = None, None
 
-with tqdm(total=repeat, ncols=80) as pbar:
+with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {n_fmt}/{total_fmt}') as pbar:
     while True:
         pygame.event.pump()
 
@@ -69,7 +71,7 @@ with tqdm(total=repeat, ncols=80) as pbar:
         x = joystick.get_axis(0)
         y = joystick.get_axis(1)
         
-        if not ("0.0" in str(x) and "0.0" in str(y)):
+        if not ("0.0" in str(x) and "0.0" in str(y)): # Переконуємося що стік достатньо відхилився (Антидріфт)
             
             if prev_x is None and prev_y is None:
                 prev_x, prev_y = x, y
@@ -88,7 +90,7 @@ with tqdm(total=repeat, ncols=80) as pbar:
                         end = time.time()
                         delay = round((end - start_time) * 1000, 2)
                         #print(delay)
-                        if delay != 0.0:
+                        if delay != 0.0 and delay > 1.5: #Відсікаємо низькі нереальні значення 
                             times.append(delay)
                             pbar.update(1)
                             delay_list.append(delay)
@@ -98,9 +100,9 @@ with tqdm(total=repeat, ncols=80) as pbar:
             if len(times) >= repeat:
                 break
 
+delat_clear = delay_list
+#delat_clear.sort() # Сортування
 delay_list = filter_outliers(delay_list)
-
-
 
 filteredMin = min(delay_list)
 filteredMax = max(delay_list)
@@ -119,10 +121,29 @@ print(f"Maximum latency:    {filteredMax} ms")
 print(f"Polling Rate:       {polling_rate} Hz")
 print(f"Jitter [Beta]:      {jitter} ms")
 
-url_gen = f"{filteredMin}_{filteredAverage_rounded}_{filteredMax}_{polling_rate}_{joystick_name}"
-encoded_url_gen = base64.b64encode(url_gen.encode('utf-8')).decode('utf-8')
-url_fin = "https://gamepadla.com/sb_" + encoded_url_gen
+# Отримати інформацію про операційну систему
+os_name = platform.system()  # Назва операційної системи
+os_version = platform.release()  # Версія операційної системи
+print(f" ")
+print(f"Operating System:   {os_name}")
+print(f"OS Version:         {os_version}")
 
 print(f" ")
-if input("Send the test result to Gamepadla.com? (Y/N): ").lower() == "y":
-    webbrowser.open(url_fin)
+if input("Save the test result? (Y/N): ").lower() == "y":
+    with open('test_results.txt', 'w') as f:
+        f.write(f"Gamepadla {ver}\n")
+        f.write(f"https://gamepadla.com\n")
+        f.write(f" \n")
+        f.write(f"Date:         {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}\n")
+        f.write(f"Driver:       {joystick_name}\n")
+        f.write(f"OS Name:      {os_name}\n")
+        f.write(f"OS Ver.:      {os_version}\n")
+        f.write(f" \n")
+        f.write(f"Minimal latency:  {filteredMin} ms\n")
+        f.write(f"Average latency:  {filteredAverage_rounded} ms\n")
+        f.write(f"Maximum latency:  {filteredMax} ms\n")
+        f.write(f"Polling Rate:     {polling_rate} Hz\n")
+        f.write(f"Jitter [Beta]:    {jitter} ms\n")
+        f.write(f" \n")
+        f.write(f"Delay List ({len(delat_clear)}): \n{delat_clear}\n")
+    print("Test results saved in 'test_results.txt'")
