@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['Gamepadla.py'],
+    ['Gamepadla_1.0.1.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='Gamepadla',
+    name='Gamepadla_1.0.1',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -41,5 +41,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['favicon2.ico'],
 )
