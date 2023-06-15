@@ -101,7 +101,7 @@ with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {n_fmt}/{total_fmt}')
                 break
 
 delat_clear = delay_list
-#delat_clear.sort() # Сортування
+delat_clear.sort() # Сортування
 delay_list = filter_outliers(delay_list)
 
 filteredMin = min(delay_list)
