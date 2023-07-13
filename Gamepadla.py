@@ -140,12 +140,10 @@ while True:
     jitter = round(jitter, 2)
 
     print(f" ")
-    print(f"Polling Rate:       {polling_rate} Hz")
-    print(f" ")
-    print(f"===Unreliable parameters===")
     print(f"Minimal latency:    {filteredMin} ms")
     print(f"Average latency:    {filteredAverage_rounded} ms")
     print(f"Maximum latency:    {filteredMax} ms")
+    print(f"Polling Rate:       {polling_rate} Hz")
     print(f"Jitter:             {jitter} ms")
     #print(f"Data:      {delay_clear} ms")
 
