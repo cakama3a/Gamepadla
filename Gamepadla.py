@@ -1,4 +1,4 @@
-ver = "1.0.4"
+ver = "1.0.5"
 print("Gamepadla " + ver + " | https://gamepadla.com")
 print("")
 
