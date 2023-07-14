@@ -10,6 +10,9 @@ Pyhon code written by John Punch: https://t.me/ivanpunch
     ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝███████╗██║  ██║
      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 
+A website with a catalog of tested gamepads: https://gamepadla.com
+
+ABOUT GAMEPADLA  
 Gamepadla is an easy way to check the latency of your gamepad. This tool will help you get accurate data about your controller's performance, which can be useful for gamers, game developers, and enthusiasts.  
 Gamepadla works with most popular gamepads and supports DInput and XInput protocols, making it a versatile solution for testing different types of controllers.  
 
