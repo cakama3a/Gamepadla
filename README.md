@@ -1,6 +1,6 @@
 # Gamepadla
-Gamepads latency tester and polling rate program/n
-  Based on the method of: https://github.com/chrizonix/XInputTest
+Gamepads latency tester and polling rate program  
+Based on the method of: https://github.com/chrizonix/XInputTest
 
     ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ ██╗      █████╗
    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗██╔══██╗██║     ██╔══██╗
