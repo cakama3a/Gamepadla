@@ -1,4 +1,4 @@
-ver = "1.0.5"
+ver = "1.0.6"
 print("Gamepadla " + ver + " | https://gamepadla.com")
 print("")
 
@@ -48,9 +48,27 @@ while True:
         exit(1)
     else:
         print(f" ")
-        print(f"Found {len(joysticks)} of controller(s)")
+        print(f"Found {len(joysticks)} controller(s)")
 
-        # User Vars
+        for idx, joystick in enumerate(joysticks):
+            print(f"{idx + 1}. {joystick.get_name()}")
+
+        selected_index = input("Please enter the index of the controller you want to test: ")
+        try:
+            selected_index = int(selected_index) - 1
+            if 0 <= selected_index < len(joysticks):
+                joystick = joysticks[selected_index]
+            else:
+                print("Invalid index. Defaulting to the first controller.")
+                joystick = joysticks[0]
+        except ValueError:
+            print("Invalid input. Defaulting to the first controller.")
+            joystick = joysticks[0]
+
+        joystick.init()
+        joystick_name = joystick.get_name()
+        print(f"Gamepad mode:       {joystick_name}")
+
         connection = input("Please select connection type (1. Cable, 2. Bluetooth, 3. Dongle): ")
         if connection == "1":
             connection = "Cable"
@@ -64,11 +82,6 @@ while True:
 
         gamepad_name = input("Please enter the name of your gamepad: ")
 
-        # Використовуємо перший контролер
-        joystick = joysticks[0]
-        joystick.init()
-        joystick_name = joystick.get_name()
-        print(f"Gamepad mode:       {joystick_name}")
         print(f"Connected by:       {connection}")
          # Отримати інформацію про операційну систему
         os_name = platform.system()  # Назва операційної системи
