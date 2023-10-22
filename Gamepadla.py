@@ -1,4 +1,4 @@
-ver = "1.0.6"
+ver = "1.0.7"
 print("Gamepadla " + ver + " | https://gamepadla.com")
 print("")
 
@@ -10,6 +10,7 @@ import numpy as np
 import platform
 import requests
 import uuid
+import math
 import webbrowser
 
 print("Based on the method of: https://github.com/chrizonix/XInputTest")
@@ -23,10 +24,10 @@ print(f"  ╚██████╔╝██║  ██║██║ ╚═╝ █
 print(f"   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝")
 print("                                         by John Punch: https://t.me/ivanpunch")
 
-repeat = 1984 #1984
+#repeat = 1984 #1984
 
 def filter_outliers(array):
-    lower_quantile = 0.02  # Lower quantile (1%)
+    lower_quantile = 0.02   # Lower quantile (1%)
     upper_quantile = 0.995  # Upper quantile (99%)
 
     sorted_array = sorted(array)
@@ -68,25 +69,26 @@ while True:
         joystick.init()
         joystick_name = joystick.get_name()
         print(f"Gamepad mode:       {joystick_name}")
-
-        connection = input("Please select connection type (1. Cable, 2. Bluetooth, 3. Dongle): ")
-        if connection == "1":
-            connection = "Cable"
-        elif connection == "2":
-            connection = "Bluetooth"
-        elif connection == "3":
-            connection = "Dongle"
-        else:
-            print("Invalid choice. Defaulting to Cable.")
-            connection = "Unset"
-
-        gamepad_name = input("Please enter the name of your gamepad: ")
-
-        print(f"Connected by:       {connection}")
          # Отримати інформацію про операційну систему
         os_name = platform.system()  # Назва операційної системи
         os_version = platform.release()  # Версія операційної системи
         print(f"Operating System:   {os_name}")
+
+        repeat = 1988
+        repeatq = input("Please select number of tests (1. 2000, 2. 4000, 3. 6000), or enter your own number: ")
+        if repeatq == "1":
+            repeat = 2000
+        elif repeatq == "2":
+            repeat = 4000
+        elif repeatq == "3":
+            repeat = 6000
+        else:
+            try:
+                repeat = int(repeatq)
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+        # print(f"Connected by:       {connection}")
         #print(f"OS Version:         {os_version}")
         print(f" ")
         print(f"Rotate left stick without stopping")
@@ -100,7 +102,7 @@ while True:
 
     prev_x, prev_y = None, None
 
-    with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {n_fmt}/{total_fmt}') as pbar:
+    with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {postfix[0]}', postfix=[0]) as pbar:
         while True:
             pygame.event.pump()
 
@@ -130,6 +132,7 @@ while True:
                             if delay != 0.0 and delay > 1.5: #Відсікаємо низькі нереальні значення 
                                 times.append(delay)
                                 pbar.update(1)
+                                pbar.postfix[0] = "{:05.2f} ms".format(delay)
                                 delay_list.append(delay)
                             
                             break
@@ -152,11 +155,24 @@ while True:
     jitter = np.std(delay_list)
     jitter = round(jitter, 2)
 
+    def get_polling_rate_max(actual_rate):
+        actual_rate = math.floor(actual_rate)
+        polling_rates = [125, 250, 500, 1000]
+        closest_rate = min(filter(lambda x: x >= actual_rate, polling_rates))
+        return closest_rate
+
     print(f" ")
+    max_polling_rate = get_polling_rate_max(polling_rate)
+    print(f"Polling Rate Max.:  {max_polling_rate} Hz")
+    print(f"Polling Rate Avg.:  {polling_rate} Hz")
+    stablility = round((polling_rate/max_polling_rate)*100, 2)
+    print(f"Stability:          {stablility}%")
+
+    print(f" ")
+    print(f"=== Synthetic tests ===")
     print(f"Minimal latency:    {filteredMin} ms")
     print(f"Average latency:    {filteredAverage_rounded} ms")
     print(f"Maximum latency:    {filteredMax} ms")
-    print(f"Polling Rate:       {polling_rate} Hz")
     print(f"Jitter:             {jitter} ms")
     #print(f"Data:      {delay_clear} ms")
 
@@ -170,8 +186,6 @@ while True:
         'url': 'https://gamepadla.com',
         'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
         'driver': joystick_name,
-        'connection': connection,
-        'name': gamepad_name,
         'os_name': os_name,
         'os_version': os_version,
         'min_latency': filteredMin,
@@ -183,24 +197,40 @@ while True:
         'delay_list': str_of_numbers
     }
 
-    #response = requests.post('https://gamepadla.com/scripts/makeit.php?poster', json=data)
-    response = requests.post('https://gamepadla.com/scripts/poster.php', data=data)
+    # Записуємо дані в файл з відступами для кращої читабельності
+    with open('data.txt', 'w') as outfile:
+        json.dump(data, outfile, indent=4)
 
-    if response.status_code == 200:
-        print("Test results successfully sent to the server.")
-        # Перенаправляємо користувача на сторінку з результатами тесту
-        webbrowser.open(f'https://gamepadla.com/result/{test_key}/')
-    else:
-        print("Failed to send test results to the server.")
+     # Використовуйте це:
+    if input("Open in browser? (Y/N): ").lower() == "y":
+        gamepad_name = input("Please enter the name of your gamepad: ")
+        connection = input("Please select connection type (1. Cable, 2. Bluetooth, 3. Dongle): ")
+        if connection == "1":
+            connection = "Cable"
+        elif connection == "2":
+            connection = "Bluetooth"
+        elif connection == "3":
+            connection = "Dongle"
+        else:
+            print("Invalid choice. Defaulting to Cable.")
+            connection = "Unset"
+
+        # Додаэмо данні в масив
+        data['connection'] = connection  
+        data['name'] = gamepad_name
+
+        response = requests.post('https://gamepadla.com/scripts/poster.php', data=data)
+        if response.status_code == 200:
+            print("Test results successfully sent to the server.")
+            # Перенаправляємо користувача на сторінку з результатами тесту
+            webbrowser.open(f'https://gamepadla.com/result/{test_key}/')
+        else:
+            print("Failed to send test results to the server.")
 
     # Видаляємо непотрібні ключі
     del data['test_key']
     del data['os_version']
     del data['url']
-    
-    # Записуємо дані в файл з відступами для кращої читабельності
-    with open('data.txt', 'w') as outfile:
-        json.dump(data, outfile, indent=4)
 
     # Використовуйте це:
     if input("Run again? (Y/N): ").lower() != "y":
