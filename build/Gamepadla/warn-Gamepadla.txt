@@ -14,14 +14,14 @@ Types if import:
 IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
             tracking down the missing module yourself. Thanks!
 
-missing module named posix - imported by shutil (conditional), importlib._bootstrap_external (conditional), posixpath (optional), os (conditional, optional)
+missing module named posix - imported by posixpath (optional), shutil (conditional), importlib._bootstrap_external (conditional), os (conditional, optional)
 missing module named resource - imported by posix (top-level)
 missing module named _frozen_importlib_external - imported by importlib._bootstrap (delayed), importlib (optional), importlib.abc (optional), zipimport (top-level)
 excluded module named _frozen_importlib - imported by importlib (optional), importlib.abc (optional), zipimport (top-level)
 missing module named 'org.python' - imported by copy (optional), xml.sax (delayed, conditional)
 missing module named org - imported by pickle (optional)
-missing module named pwd - imported by shutil (delayed, optional), tarfile (optional), posixpath (delayed, conditional, optional), subprocess (delayed, conditional, optional), pathlib (delayed, optional), netrc (delayed, conditional), getpass (delayed), http.server (delayed, optional), webbrowser (delayed)
-missing module named grp - imported by shutil (delayed, optional), tarfile (optional), subprocess (delayed, conditional, optional), pathlib (delayed, optional)
+missing module named pwd - imported by posixpath (delayed, conditional, optional), shutil (delayed, optional), tarfile (optional), pathlib (delayed, optional), subprocess (delayed, conditional, optional), netrc (delayed, conditional), getpass (delayed), http.server (delayed, optional), webbrowser (delayed)
+missing module named grp - imported by shutil (delayed, optional), tarfile (optional), pathlib (delayed, optional), subprocess (delayed, conditional, optional)
 missing module named pyimod02_importers - imported by C:\Users\cakam\AppData\Local\Programs\Python\Python311\Lib\site-packages\PyInstaller\hooks\rthooks\pyi_rth_pkgutil.py (top-level), C:\Users\cakam\AppData\Local\Programs\Python\Python311\Lib\site-packages\PyInstaller\hooks\rthooks\pyi_rth_pkgres.py (top-level)
 missing module named _posixsubprocess - imported by subprocess (conditional), multiprocessing.util (delayed)
 missing module named fcntl - imported by subprocess (optional), tqdm.utils (delayed, optional)

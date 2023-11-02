@@ -1,4 +1,4 @@
-ver = "1.0.7"
+ver = "1.0.8"
 print("Gamepadla " + ver + " | https://gamepadla.com")
 print("")
 
@@ -105,10 +105,9 @@ while True:
     with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {postfix[0]}', postfix=[0]) as pbar:
         while True:
             pygame.event.pump()
-
-            # Положення стіків в момент оберту
             x = joystick.get_axis(0)
             y = joystick.get_axis(1)
+            pygame.event.clear()
             
             if not ("0.0" in str(x) and "0.0" in str(y)): # Переконуємося що стік достатньо відхилився (Антидріфт)
                 
@@ -124,12 +123,13 @@ while True:
                         pygame.event.pump()
                         new_x = joystick.get_axis(0)
                         new_y = joystick.get_axis(1)
+                        pygame.event.clear()
 
                         if new_x != x or new_y != y:
                             end = time.time()
                             delay = round((end - start_time) * 1000, 2)
                             #print(delay)
-                            if delay != 0.0 and delay > 1.5: #Відсікаємо низькі нереальні значення 
+                            if delay != 0.0 and delay > 0.2 and delay < 150:  #Відсікаємо низькі нереальні значення 
                                 times.append(delay)
                                 pbar.update(1)
                                 pbar.postfix[0] = "{:05.2f} ms".format(delay)
