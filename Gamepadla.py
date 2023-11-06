@@ -1,6 +1,17 @@
-ver = "1.0.8"
-print("Gamepadla " + ver + " | https://gamepadla.com")
-print("")
+ver = "1.0.9"
+print(f" ")
+print(f" ")
+print(f"   ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ \033[34m██╗      █████╗ \033[0m")
+print(f"  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗██╔══██╗\033[34m██║     ██╔══██╗\033[0m")
+print(f"  ██║  ███╗███████║██╔████╔██║█████╗  ██████╔╝███████║██║  ██║\033[34m██║     ███████║\033[0m")
+print(f"  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ██╔═══╝ ██╔══██║██║  ██║\033[34m██║     ██╔══██║\033[0m")
+print(f"  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝\033[34m███████╗██║  ██║\033[0m")
+print(f"   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ \033[34m╚══════╝╚═╝  ╚═╝\033[0m")
+print(f"   \033[34mGamepadla Tester\033[0m {ver}                               https://gamepadla.com")
+print(f" ")
+print(f" ")
+print(f"Credits:")
+print("Based on the method of: https://github.com/chrizonix/XInputTest")
 
 import pygame
 import time
@@ -12,17 +23,6 @@ import requests
 import uuid
 import math
 import webbrowser
-
-print("Based on the method of: https://github.com/chrizonix/XInputTest")
-print(f"Warning, this test certainly only shows Polling Rate!")
-print(f" ")
-print(f"   ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ ██╗      █████╗ ")
-print(f"  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗██╔══██╗██║     ██╔══██╗")
-print(f"  ██║  ███╗███████║██╔████╔██║█████╗  ██████╔╝███████║██║  ██║██║     ███████║")
-print(f"  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ██╔═══╝ ██╔══██║██║  ██║██║     ██╔══██║")
-print(f"  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝███████╗██║  ██║")
-print(f"   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝")
-print("                                         by John Punch: https://t.me/ivanpunch")
 
 #repeat = 1984 #1984
 
@@ -130,7 +130,7 @@ while True:
                             delay = round((end - start_time) * 1000, 2)
                             #print(delay)
                             if delay != 0.0 and delay > 0.2 and delay < 150:  #Відсікаємо низькі нереальні значення 
-                                times.append(delay)
+                                times.append(delay * 1.057) # Відіймаємо 5% * 1.057
                                 pbar.update(1)
                                 pbar.postfix[0] = "{:05.2f} ms".format(delay)
                                 delay_list.append(delay)
@@ -155,11 +155,16 @@ while True:
     jitter = np.std(delay_list)
     jitter = round(jitter, 2)
 
+    # Розрахунок максиально можливого полінг рейту на базі існуючого
     def get_polling_rate_max(actual_rate):
-        actual_rate = math.floor(actual_rate)
-        polling_rates = [125, 250, 500, 1000]
-        closest_rate = min(filter(lambda x: x >= actual_rate, polling_rates))
-        return closest_rate
+        max_rate = 125
+        if actual_rate > 150:
+            max_rate = 250
+        if actual_rate > 320:
+            max_rate = 500 
+        if actual_rate > 600:
+            max_rate = 1000
+        return max_rate
 
     print(f" ")
     max_polling_rate = get_polling_rate_max(polling_rate)
