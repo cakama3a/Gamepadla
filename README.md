@@ -1,5 +1,5 @@
-# Gamepadla [Polling Rate Tester]
-Gamepads polling rate tester
+# Gamepadla
+Gamepads polling rate and synthetic latency tester
 Based on the method of Christian P.: https://github.com/chrizonix/XInputTest  
 Pyhon code written by John Punch: https://t.me/ivanpunch
 
