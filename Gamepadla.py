@@ -1,19 +1,5 @@
-ver = "1.0.9"
-print(f" ")
-print(f" ")
-print(f"   ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ \033[34m██╗      █████╗ \033[0m")
-print(f"  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗██╔══██╗\033[34m██║     ██╔══██╗\033[0m")
-print(f"  ██║  ███╗███████║██╔████╔██║█████╗  ██████╔╝███████║██║  ██║\033[34m██║     ███████║\033[0m")
-print(f"  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ██╔═══╝ ██╔══██║██║  ██║\033[34m██║     ██╔══██║\033[0m")
-print(f"  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝\033[34m███████╗██║  ██║\033[0m")
-print(f"   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ \033[34m╚══════╝╚═╝  ╚═╝\033[0m")
-print(f"   \033[34mGamepadla Tester\033[0m {ver}                               https://gamepadla.com")
-print(f" ")
-print(f" ")
-print(f"Credits:")
-print("Based on the method of: https://github.com/chrizonix/XInputTest")
-
-import pygame
+ver = "1.1.0"
+from colorama import Fore, Back, Style
 import time
 import json
 from tqdm import tqdm
@@ -21,8 +7,22 @@ import numpy as np
 import platform
 import requests
 import uuid
-import math
 import webbrowser
+
+print(f" ")
+print(f" ")
+print("   ██████╗  █████╗ ███╗   ███╗███████╗██████╗  █████╗ ██████╗ " + Fore.CYAN + "██╗      █████╗ " + Fore.RESET)
+print("  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔══██╗██╔══██╗██╔══██╗" + Fore.CYAN + "██║     ██╔══██╗" + Fore.RESET)
+print("  ██║  ███╗███████║██╔████╔██║█████╗  ██████╔╝███████║██║  ██║" + Fore.CYAN + "██║     ███████║" + Fore.RESET)
+print("  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ██╔═══╝ ██╔══██║██║  ██║" + Fore.CYAN + "██║     ██╔══██║" + Fore.RESET)
+print("  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝" + Fore.CYAN + "███████╗██║  ██║" + Fore.RESET)
+print("   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ " + Fore.CYAN + "╚══════╝╚═╝  ╚═╝" + Fore.RESET)
+print(Fore.CYAN + "    " + "Polling Rate Tester" + Fore.RESET + "  " + ver + "                         https://gamepadla.com")
+print(f" ")
+print(f" ")
+print(f"Credits:")
+print("Based on the method of: https://github.com/chrizonix/XInputTest")
+import pygame
 
 #repeat = 1984 #1984
 
