@@ -17,7 +17,7 @@ print("  ██║  ███╗███████║██╔████╔
 print("  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ██╔═══╝ ██╔══██║██║  ██║" + Fore.CYAN + "██║     ██╔══██║" + Fore.RESET)
 print("  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║     ██║  ██║██████╔╝" + Fore.CYAN + "███████╗██║  ██║" + Fore.RESET)
 print("   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ " + Fore.CYAN + "╚══════╝╚═╝  ╚═╝" + Fore.RESET)
-print(Fore.CYAN + "    " + "Polling Rate Tester" + Fore.RESET + "  " + ver + "                         https://gamepadla.com")
+print(Fore.CYAN + "    " + "Gamepadla Tester" + Fore.RESET + "  " + ver + "                           https://gamepadla.com")
 print(f" ")
 print(f" ")
 print(f"Credits:")
