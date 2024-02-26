@@ -11,7 +11,7 @@ ABOUT GAMEPADLA
 Gamepadla is an easy way to check the polling rate of your gamepad. This tool will help you get accurate data about your controller's performance, which can be useful for gamers, game developers, and enthusiasts.  
 Gamepadla works with most popular gamepads and supports DInput and XInput protocols, making it a versatile solution for testing different types of controllers.  
 
-![image](https://github.com/cakama3a/Gamepadla/assets/15096106/394e95a0-2799-477c-891f-88d52bdc7594)
+![image](https://github.com/cakama3a/Gamepadla/assets/15096106/1152f147-2db9-4301-962e-2ac97555a0fa)
 
 DISCLAMER  
 Gamepadla measures the delay between successive changes in the position of the analog stick on the gamepad, rather than the traditional input latency, which measures the time between pressing a button on the gamepad and a response in a program or game.  
