@@ -8,8 +8,6 @@ import platform
 import requests
 import uuid
 import webbrowser
-import sys
-sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 print(f" ")
 print(f" ")
@@ -134,7 +132,8 @@ while True:
                             if delay != 0.0 and delay > 0.2 and delay < 150:  #Відсікаємо низькі нереальні значення 
                                 times.append(delay * 1.057) # Відіймаємо 5% * 1.057
                                 pbar.update(1)
-                                pbar.postfix[0] = "{:05.2f} ms".format(delay)
+                                pbar.set_postfix_str("{:05.2f} ms".format(delay))
+                                
                                 delay_list.append(delay)
                             
                             break
