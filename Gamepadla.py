@@ -8,6 +8,8 @@ import platform
 import requests
 import uuid
 import webbrowser
+import sys
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 print(f" ")
 print(f" ")
