@@ -1,4 +1,4 @@
-ver = "1.1.1"
+ver = "1.1.2"
 from colorama import Fore, Back, Style
 import time
 import json
