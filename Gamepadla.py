@@ -1,4 +1,4 @@
-ver = "1.1.0"
+ver = "1.1.1"
 from colorama import Fore, Back, Style
 import time
 import json
@@ -102,7 +102,7 @@ while True:
 
     prev_x, prev_y = None, None
 
-    with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} {postfix[0]}', postfix=[0]) as pbar:
+    with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar}{postfix[0]}', postfix=[0]) as pbar:
         while True:
             pygame.event.pump()
             x = joystick.get_axis(0)
