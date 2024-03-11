@@ -1,7 +1,7 @@
 # Gamepadla
 Gamepads polling rate and synthetic latency tester
 Based on the method of Christian P.: https://github.com/chrizonix/XInputTest  
-Pyhon code written by John Punch: https://t.me/ivanpunch
+Pyhon code written by [John Punch](https://www.reddit.com/user/JohnnyPunch/)  
 
 ![image](https://github.com/cakama3a/Gamepadla/assets/15096106/5ea9dfba-e31a-4911-960b-0cc9d2f66bc4)
 
