@@ -1,4 +1,4 @@
-ver = "1.1.4"
+ver = "1.1.5"
 
 from colorama import Fore, Back, Style
 import time
@@ -70,9 +70,10 @@ while True:
         joystick.init()
         joystick_name = joystick.get_name()
         print(f"Gamepad mode:       {joystick_name}")
-         # Отримати інформацію про операційну систему
-        os_name = platform.system()  # Назва операційної системи
-        os_version = platform.release()  # Версія операційної системи
+        # OS Version
+        os_name = platform.system()  # Назва операційної системи (the name of the operating system)
+        uname = platform.uname()
+        os_version = uname.version
         print(f"Operating System:   {os_name}")
 
         repeat = 1988
