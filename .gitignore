@@ -3,3 +3,5 @@
 Gamepadla.spec
 .Gamepadla.spec
 data.txt
+/dist
+/venv

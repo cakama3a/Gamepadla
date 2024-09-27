@@ -1,0 +1,50 @@
+[build-system]
+requires = [
+    "hatchling", 
+    "versioningit",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "versioningit"
+
+
+[project]
+name = "Gamepadla"
+description = "Gamepads latency and polling rate tester "
+authors = [
+  { name="John Punch" },
+]
+maintainers = [
+  { name="John Punch" },
+]
+readme = "README.md"
+license = {text = "MIT License"}
+keywords = ["gamepad", "test", "latency"]
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+]
+
+dynamic = ["version"]
+
+dependencies = [
+    "colorama",
+    "tqdm",
+    "numpy",
+    "requests",
+    "pygame",
+]
+
+
+[project.urls]
+Homepage = "https://gamepadla.com/"
+Repository = "https://github.com/cakama3a/Gamepadla"
+Issues = "https://github.com/pypa/sampleproject/issues"
+
+
+[project.scripts]
+Gamepadla = "Gamepadla:main"
+
