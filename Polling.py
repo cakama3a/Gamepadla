@@ -1,11 +1,10 @@
 # Current version of the program
-ver = "1.1.7"
+ver = "1.1.8"
 
 # Required libraries import
 from colorama import Fore, Style
 import time
 import json
-from tqdm import tqdm
 import numpy as np
 import platform
 import requests
@@ -16,13 +15,14 @@ import pygame
 # Print introductory information
 print(f" ")
 print(f" ")
-print("   ██████╗  ██████╗ ██╗     ██╗     ██╗███╗   ██╗" + Fore.LIGHTRED_EX + " ██████╗ " + Fore.RESET + "")
-print("   ██╔══██╗██╔═══██╗██║     ██║     ██║████╗  ██║" + Fore.LIGHTRED_EX + "██╔════╝ " + Fore.RESET + "")
-print("   ██████╔╝██║   ██║██║     ██║     ██║██╔██╗ ██║" + Fore.LIGHTRED_EX + "██║  ███╗" + Fore.RESET + "")
-print("   ██╔═══╝ ██║   ██║██║     ██║     ██║██║╚██╗██║" + Fore.LIGHTRED_EX + "██║   ██║" + Fore.RESET + "")
-print("   ██║     ╚██████╔╝███████╗███████╗██║██║ ╚████║" + Fore.LIGHTRED_EX + "╚██████╔╝" + Fore.RESET + "")
-print("   ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝" + Fore.LIGHTRED_EX + " ╚═════╝ " + Fore.RESET + "")
-print(f"   Polling Rate Tester {ver}       https://gamepadla.com")
+print("   ██████╗  ██████╗ ██╗     ██╗     ██╗███╗   ██╗" + Fore.CYAN + " ██████╗ " + Fore.RESET + "")
+print("   ██╔══██╗██╔═══██╗██║     ██║     ██║████╗  ██║" + Fore.CYAN + "██╔════╝ " + Fore.RESET + "")
+print("   ██████╔╝██║   ██║██║     ██║     ██║██╔██╗ ██║" + Fore.CYAN + "██║  ███╗" + Fore.RESET + "")
+print("   ██╔═══╝ ██║   ██║██║     ██║     ██║██║╚██╗██║" + Fore.CYAN + "██║   ██║" + Fore.RESET + "")
+print("   ██║     ╚██████╔╝███████╗███████╗██║██║ ╚████║" + Fore.CYAN + "╚██████╔╝" + Fore.RESET + "")
+print("   ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝" + Fore.CYAN + " ╚═════╝ " + Fore.RESET + "")
+print(f"   " + Fore.CYAN + "Polling Rate Tester" + Fore.RESET + " {ver}       https://gamepadla.com")
+print(f"   Support the project:            https://ko-fi.com/gamepadla")
 print(f" ")
 print(f" ")
 print(f"Credits:")
@@ -154,38 +154,41 @@ while True:
         times = []
         start_time = time.perf_counter_ns()
         prev_x, prev_y = None, None
+        measurements_count = 0
 
-        # Main measurement loop with progress bar
-        with tqdm(total=repeat, ncols=76, bar_format='{l_bar}{bar} | {postfix[0]}', postfix=[0]) as pbar:
-            while True:
-                # Get controller input
-                pygame.event.pump()
-                x = joystick.get_axis(axis_x)
-                y = joystick.get_axis(axis_y)
-                pygame.event.clear()
+        print("")  # Add empty line before measurements start
 
-                # Process stick movement
-                if not ("0.0" in str(x) and "0.0" in str(y)):
-                    if prev_x is None and prev_y is None:
-                        prev_x, prev_y = x, y
-                        prev_time = start_time
-                    elif x != prev_x or y != prev_y:
-                        # Calculate delay between movements
-                        end_time = time.perf_counter_ns()
-                        delay = round((end_time - prev_time) / 1_000_000, 3)
-                        prev_time = end_time
-                        prev_x, prev_y = x, y
+        # Main measurement loop
+        while True:
+            # Get controller input
+            pygame.event.pump()
+            x = joystick.get_axis(axis_x)
+            y = joystick.get_axis(axis_y)
+            pygame.event.clear()
 
-                        # Record valid measurements
-                        if delay != 0.0 and delay > 0.1 and delay < 150:
-                            times.append(delay)
-                            pbar.update(1)
-                            pbar.postfix[0] = "{:05.2f} ms".format(delay)
-                            delay_list.append(delay)
+            # Process stick movement
+            if not ("0.0" in str(x) and "0.0" in str(y)):
+                if prev_x is None and prev_y is None:
+                    prev_x, prev_y = x, y
+                    prev_time = start_time
+                elif x != prev_x or y != prev_y:
+                    # Calculate delay between movements
+                    end_time = time.perf_counter_ns()
+                    delay = round((end_time - prev_time) / 1_000_000, 3)
+                    prev_time = end_time
+                    prev_x, prev_y = x, y
 
-                    # Check if we have enough measurements
-                    if len(times) >= repeat:
-                        break
+                    # Record valid measurements
+                    if delay != 0.0 and delay > 0.1 and delay < 150:
+                        times.append(delay)
+                        measurements_count += 1
+                        progress_percentage = (measurements_count / repeat) * 100
+                        print(f"[{progress_percentage:3.0f}%] {delay:.2f} ms")
+                        delay_list.append(delay)
+
+                # Check if we have enough measurements
+                if len(times) >= repeat:
+                    break
 
         # Store raw data before filtering
         delay_clear = delay_list
@@ -222,7 +225,7 @@ while True:
         data = {
             'test_key': str(test_key),
             'version': ver,
-            'url': 'https://polling.com',
+            'url': 'https://gamepadla.com',
             'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
             'driver': joystick_name,
             'os_name': os_name,
@@ -260,10 +263,10 @@ while True:
             data['name'] = gamepad_name
 
             # Send results to server
-            response = requests.post('https://polling.com/scripts/poster.php', data=data)
+            response = requests.post('https://gamepadla.com/scripts/poster.php', data=data)
             if response.status_code == 200:
                 print("Test results successfully sent to the server.")
-                webbrowser.open(f'https://polling.com/result/{test_key}/')
+                webbrowser.open(f'https://gamepadla.com/result/{test_key}/')
             else:
                 print("Failed to send test results to the server.")
 
