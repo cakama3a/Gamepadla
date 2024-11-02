@@ -1,30 +1,31 @@
-# Gamepadla
+# Polling by Gamepadla
 Gamepads polling rate and synthetic latency tester
 Based on the method of Christian P.: https://github.com/chrizonix/XInputTest  
 Pyhon code written by [John Punch](https://www.reddit.com/user/JohnnyPunch/)  
 
-![image](https://github.com/cakama3a/Gamepadla/assets/15096106/5ea9dfba-e31a-4911-960b-0cc9d2f66bc4)
+![image](https://github.com/user-attachments/assets/cad1afa7-2b24-4d27-a0ca-a0be02e82ccf)
+
 
 A website with a catalog of tested gamepads: https://gamepadla.com
 
-ABOUT GAMEPADLA  
-Gamepadla is an easy way to check the polling rate of your gamepad. This tool will help you get accurate data about your controller's performance, which can be useful for gamers, game developers, and enthusiasts.  
-Gamepadla works with most popular gamepads and supports DInput and XInput protocols, making it a versatile solution for testing different types of controllers.  
+ABOUT POLLING  
+Polling is an easy way to check the polling rate of your gamepad. This tool will help you get accurate data about your controller's performance, which can be useful for gamers, game developers, and enthusiasts.  
+Polling works with most popular gamepads and supports DInput and XInput protocols, making it a versatile solution for testing different types of controllers.  
 
 ![image](https://github.com/cakama3a/Gamepadla/assets/15096106/1152f147-2db9-4301-962e-2ac97555a0fa)
 
 DISCLAMER  
-Gamepadla measures the delay between successive changes in the position of the analog stick on the gamepad, rather than the traditional input latency, which measures the time between pressing a button on the gamepad and a response in a program or game.  
+Polling measures the latency between successive changes in the position of the analog stick on the gamepad, rather than the traditional input latency, which measures the time between pressing a button on the gamepad and a response in a program or game.  
 This method of measurement can be affected by various factors, including the quality of the gamepad, the speed of the computer's processor, the speed of event processing in the Pygame library, and so on.  
-Therefore, although Gamepadla can give a general idea of the "response" of a gamepad, it cannot accurately measure input latency in the traditional sense. The results obtained from Gamepadla should be used as a guide, not as an exact measurement of input latency.  
+Therefore, although Polling can give a general idea of the "response" of a gamepad, it cannot accurately measure input latency in the traditional sense. The results obtained from Polling should be used as a guide, not as an exact measurement of input latency.  
 
-Here's how to use Gamepadla:  
+Here's how to use Polling:  
 1.  Connect your gamepad to your PC.  
     You can connect your gamepad via Bluetooth, with a cable, or with the included receiver. Make sure your operating system recognizes the gamepad.  
-2.  Launch Gamepadla.  
-    Just double-click on the fileGamepadla.exe filefile to launch the program.  
+2.  Launch Polling.  
+    Just double-click on the file Polling.exe filefile to launch the program.  
 3.  Check the connection of your gamepad.  
-    Gamepadla will automatically detect connected gamepads. If your gamepad is not detected, make sure it is connected correctly and try again.  
+    Polling will automatically detect connected gamepads. If your gamepad is not detected, make sure it is connected correctly and try again.  
 4.  Run the test.  
     After the gamepad is detected, the program will ask you to move the left stick in a circle without stopping. This will allow the program to collect data about the gamepad's latency.  
 5.  View the results.  
