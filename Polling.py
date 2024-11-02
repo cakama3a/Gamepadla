@@ -21,7 +21,7 @@ print("   ██████╔╝██║   ██║██║     ██║  
 print("   ██╔═══╝ ██║   ██║██║     ██║     ██║██║╚██╗██║" + Fore.CYAN + "██║   ██║" + Fore.RESET + "")
 print("   ██║     ╚██████╔╝███████╗███████╗██║██║ ╚████║" + Fore.CYAN + "╚██████╔╝" + Fore.RESET + "")
 print("   ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝" + Fore.CYAN + " ╚═════╝ " + Fore.RESET + "")
-print(f"   " + Fore.CYAN + "Polling Rate Tester" + Fore.RESET + " {ver}       https://gamepadla.com")
+print(f"   " + Fore.CYAN + "Polling Rate Tester " + Fore.RESET + ver + "       https://gamepadla.com")
 print(f"   Support the project:            https://ko-fi.com/gamepadla")
 print(f" ")
 print(f" ")
