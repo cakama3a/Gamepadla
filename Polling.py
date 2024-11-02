@@ -230,13 +230,13 @@ while True:
             'driver': joystick_name,
             'os_name': os_name,
             'os_version': os_version,
-            'min_latency': filteredMin,
-            'avg_latency': filteredAverage,
-            'max_latency': filteredMax,
+            'min_latency': round(filteredMin, 2),
+            'avg_latency': round(filteredAverage, 2),
+            'max_latency': round(filteredMax, 2),
             'polling_rate': polling_rate,
-            'jitter': jitter,
-            'method': 'GP',
-            'delay_list': ', '.join(map(str, delay_clear))
+            'jitter': round(jitter, 2),
+            'mathod': 'GP',
+            'delay_list': ', '.join([f"{x:.2f}" for x in delay_clear])
         }
 
         # Save results to file
