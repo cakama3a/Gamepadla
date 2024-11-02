@@ -1,5 +1,5 @@
 # Current version of the program
-ver = "1.1.8"
+ver = "1.1.9"
 
 # Required libraries import
 from colorama import Fore, Style
@@ -212,11 +212,11 @@ while True:
         print(f"Stability:          {stability}%")
 
         print(f" ")
-        print(f"=== Synthetic tests ===")
-        print(f"Minimal latency:    {filteredMin:.2f} ms")
-        print(f"Average latency:    {filteredAverage:.2f} ms")
-        print(f"Maximum latency:    {filteredMax:.2f} ms")
-        print(f"Jitter:            {jitter:.2f} ms")
+        print(f"=== Refresh intervals ===")
+        print(f"Minimal interval:   {filteredMin:.2f} ms")
+        print(f"Average interval:   {filteredAverage:.2f} ms")
+        print(f"Maximum interval:   {filteredMax:.2f} ms")
+        print(f"Jitter:             {jitter:.2f} ms")
 
         # Generate unique test identifier
         test_key = uuid.uuid4()
