@@ -5,3 +5,4 @@ Gamepadla.spec
 data.txt
 /dist
 /venv
+diagnostic_data.json
