@@ -11,6 +11,7 @@ import requests
 import uuid
 import webbrowser
 import pygame
+print("Based on the method of: https://github.com/chrizonix/XInputTest")
 
 # Print introductory information
 print(f" ")
@@ -25,8 +26,6 @@ print(f"   " + Fore.CYAN + "Polling Rate Tester " + Fore.RESET + ver + "       h
 print(f"   Support the project:            https://ko-fi.com/gamepadla")
 print(f" ")
 print(f" ")
-print(f"Credits:")
-print("Based on the method of: https://github.com/chrizonix/XInputTest")
 pygame.init()
 
 # Function to filter out statistical outliers from the array
